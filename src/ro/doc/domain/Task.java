@@ -1,9 +1,9 @@
 package ro.doc.domain;
 
 public class Task {
-	private TaskStatus status = TaskStatus.IDLE;
+	private TaskStatus status = TaskStatus.CREATED;
 	private long duration;
-
+			
 	public TaskStatus getStatus() {
 		return status;
 	}
@@ -27,14 +27,12 @@ public class Task {
 	public boolean isRunning() {
 		return this.status.equals(TaskStatus.RUNNING);
 	}
-	
-	public String getName() {
-		return this.toString();
-	}
 
 	public void start() {
 		this.status = TaskStatus.RUNNING;
 	}
 	
-	
+	public String getName() {
+		return this.toString();
+	}
 }

@@ -9,15 +9,15 @@ import org.springframework.stereotype.Component;
 import ro.doc.services.TaskService;
 
 
-@ManagedBean(name = "taskController", eager=true)
+@ManagedBean(name = "taskController", eager = true)
 @Component
 @RequestScoped
 public class TaskController {
-	@Autowired
-	private TaskService taskService;
-	
-	public void startTasks(ActionEvent event) throws InterruptedException {
-		this.taskService.startIdleTasks();
-	}
-	
+    @Autowired
+    private TaskService taskService;
+
+    public void startTasks(ActionEvent event) throws InterruptedException {
+        this.taskService.startIdleTasks();
+    }
+
 }

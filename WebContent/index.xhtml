@@ -7,36 +7,55 @@
 		<title>Real-time applications - Part 1 - Java Code Geeks</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
-		
 		<script>
 			var part1 = angular.module("part1", []);
 			part1.controller("RealtimeCtrl", function($scope, $http, $timeout) {
-				$scope.tasks = [];
 				
 				$scope.addTask = function() {
 					$http.post("api/task", $scope.task);
-				}
+				};
 				
 				$scope.getTasks = function() {
-					$http.get("api/task")
+					$http.get("api/task/all")
 						.success(function(data) {
 							$scope.tasks = data;
+						});
+				};
+				
+				$scope.getUpdatedTasks = function() {
+					$http.get("api/task")
+						.success(function(data) {
+							data.forEach(function(currentTask) {
+								if (currentTask.status === 'IDLE') {
+									$scope.tasks.push(currentTask);
+								} else {
+									$scope.tasks.forEach(function(taskToBeUpdated) {
+										if (taskToBeUpdated.name === currentTask.name) {
+											taskToBeUpdated.status = currentTask.status;
+											taskToBeUpdated.running = currentTask.status === 'RUNNING';
+										}
+									});
+								}
+							});
+							
+							$scope.getUpdatedTasks();
+						}).error(function() {
+							$scope.getUpdatedTasks();
 						});
 				}
 				
 				$scope.activateRealtime = function() {
-					$scope.getTasks();
-					$timeout($scope.activateRealtime, 1000);
+					$scope.getUpdatedTasks();
 				}
 				
+				$scope.getTasks();
 			});
-			
 		</script>
 	</h:head>
 		
 	<h:body>
 		<div ng-app="part1" ng-controller="RealtimeCtrl" class="container">
-			<h1>Real-time application <SMALL>part 1</SMALL></h1>
+			<h1>Real-time application <SMALL>part 2</SMALL></h1>
 			<h2>Add task</h2>
 			<h:form>
 				<label for="durationField">Duration (in seconds):</label>
