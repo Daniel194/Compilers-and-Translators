@@ -1,0 +1,21 @@
+{
+  "name": "Docs",
+  "version": "1.0.0",
+  "description": "Google Docs",
+  "main": "index.html",
+  "authors": [
+    "Lungu Daniel"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jQuery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.7"
+  }
+}
