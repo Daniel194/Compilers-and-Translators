@@ -3,17 +3,29 @@ taskApp.controller("TaskController", function ($http, $scope) {
     var host = window.location.hostname + ":" + window.location.port;
 
     $scope.getTasks = function () {
+
         $http.get("http://" + host + "/tasks")
-            .success(function (data) {
-                $scope.tasks = data;
+            .then(function (success) {
+
+                $scope.tasks = success.data;
+
+            }, function (error) {
+
             });
+
     };
 
     $scope.addTask = function () {
+
         $http.post("http://" + host + "/tasks", $scope.task)
-            .success(function () {
+            .then(function () {
+
                 $scope.resetTask();
+
+            }, function (error) {
+
             });
+
     };
 
     $scope.resetTask = function () {
