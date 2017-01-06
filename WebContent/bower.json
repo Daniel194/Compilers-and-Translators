@@ -17,7 +17,7 @@
     "angular": "^1.6.1",
     "jQuery": "^3.1.1",
     "bootstrap": "^3.3.7",
-    "angular-editer": "angular-editor#^0.0.1",
-    "angular-websocket": "^2.0.0"
+    "angular-websocket": "^2.0.0",
+    "angular-trix": "^1.0.2"
   }
 }

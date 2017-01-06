@@ -5,9 +5,11 @@
     <script src="js/angular/angular.min.js"></script>
     <script src="js/jQuery/dist/jquery.js"></script>
     <script src="js/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="js/angular-editer/javascripts/angular-editor.js"></script>
+    <script src="js/trix/dist/trix.js"></script>
+    <script src="js/angular-trix/dist/angular-trix.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="js/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="js/trix/dist/trix.css">
 
     <script src="js/taskApp/taskApp.js"></script>
     <script src="js/taskApp/taskCtrl.js"></script>
@@ -105,7 +107,14 @@
 </div>
 
 <div>
-    <div simditor ng-model="xxx"></div>
+    <trix-editor ng-model-options="{ updateOn: 'blur' }" spellcheck="false" class="trix-content" ng-model="trix"
+                 angular-trix trix-initialize="trixInitialize(e, editor);" trix-change="trixChange(e, editor);"
+                 trix-selection-change="trixSelectionChange(e, editor);" trix-focus="trixFocus(e, editor);"
+                 trix-blur="trixBlur(e, editor);" trix-file-accept="trixFileAccept(e, editor);"
+                 trix-attachment-add="trixAttachmentAdd(e, editor);"
+                 trix-attachment-remove="trixAttachmentRemove(e, editor);"
+                 placeholder="Write something.."></trix-editor>
+
 </div>
 
 </body>
