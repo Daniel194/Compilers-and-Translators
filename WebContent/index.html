@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="TaskApp">
 <head>
     <title></title>
     <script src="js/angular/angular.min.js"></script>
     <script src="js/jQuery/dist/jquery.js"></script>
     <script src="js/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="js/trix/dist/trix.js"></script>
-    <script src="js/angular-trix/dist/angular-trix.min.js"></script>
+    <script src="js/textAngular/dist/textAngular-rangy.min.js"></script>
+    <script src="js/textAngular/dist/textAngular-sanitize.min.js"></script>
+    <script src="js/textAngular/dist/textAngular.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="js/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="js/trix/dist/trix.css">
+    <link rel="stylesheet" type="text/css" href="js/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="js/textAngular/dist/textAngular.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
-    <script src="js/taskApp/taskApp.js"></script>
     <script src="js/taskApp/taskCtrl.js"></script>
 
 </head>
-<body>
-<div class="container" ng-app="TaskApp" ng-controller="TaskController">
+<body ng-controller="TaskController">
+<div class="container">
     <h1>Real-time application
         <small>part 3</small>
     </h1>
@@ -106,15 +108,8 @@
     </div>
 </div>
 
-<div>
-    <trix-editor ng-model-options="{ updateOn: 'blur' }" spellcheck="false" class="trix-content" ng-model="trix"
-                 angular-trix trix-initialize="trixInitialize(e, editor);" trix-change="trixChange(e, editor);"
-                 trix-selection-change="trixSelectionChange(e, editor);" trix-focus="trixFocus(e, editor);"
-                 trix-blur="trixBlur(e, editor);" trix-file-accept="trixFileAccept(e, editor);"
-                 trix-attachment-add="trixAttachmentAdd(e, editor);"
-                 trix-attachment-remove="trixAttachmentRemove(e, editor);"
-                 placeholder="Write something.."></trix-editor>
-
+<div class="rich-text-area">
+    <text-angular ng-model="textContent"></text-angular>
 </div>
 
 </body>

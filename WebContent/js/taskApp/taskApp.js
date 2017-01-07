@@ -1,1 +1,0 @@
-taskApp = angular.module("TaskApp", []);

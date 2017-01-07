@@ -1,0 +1,8 @@
+.rich-text-area {
+    padding: 30px;
+    margin-top: 50px;
+}
+
+.rich-text-area trix-editor {
+    height: 300px;
+}
