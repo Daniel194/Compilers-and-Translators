@@ -64,14 +64,15 @@ angular.module("TaskApp", ['textAngular'])
 
          */
 
-        $scope.textContent = '';
+        $scope.document = {};
+        $scope.document.text = '';
 
         $scope.getDocument = function () {
 
             $http.get("http://" + address + "/document")
                 .then(function (success) {
 
-                    $scope.textContent = success.data;
+                    $scope.document = success.data;
 
                 }, function (error) {
 
@@ -79,9 +80,9 @@ angular.module("TaskApp", ['textAngular'])
 
         };
 
-        $scope.$watch('textContent', function () {
+        $scope.$watch('document.text', function () {
 
-            $http.post("http://" + address + "/document", $scope.textContent)
+            $http.post("http://" + address + "/document", $scope.document)
                 .then(function () {
 
                 }, function (error) {
@@ -89,11 +90,13 @@ angular.module("TaskApp", ['textAngular'])
                 });
         });
 
+        $scope.getDocument();
+
         // WebSocket Initialization
         var documentSocket = new WebSocket("ws://" + address + "/channel/document");
 
         documentSocket.onmessage = function (message) {
-            $scope.textContent = JSON.parse(message.data);
+            $scope.document = JSON.parse(message.data)[0];
             $scope.$apply();
         };
 

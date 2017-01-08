@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import ro.doc.task.domain.Document;
 import ro.doc.task.repository.DocumentRepository;
 
-import java.util.List;
-
 @RestController
 public class DocumentRestController {
 
