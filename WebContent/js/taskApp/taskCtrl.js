@@ -1,8 +1,6 @@
 angular.module("TaskApp", ['textAngular'])
-    .controller("TaskController", function ($http, $scope, textAngularManager) {
-
+    .controller("TaskController", function ($http, $scope) {
         var address = window.location.hostname + ":" + window.location.port;
-        $scope.textContent = '<p>dfsf</p><p>sfsdfsdf</p><p><br/></p><p>sdfsdfsdf</p><p>sdfsdfsdf</p><p>sdfsdf</p><p>l<span id="selectionBoundary_1483814084781_7623380121544683" class="rangySelectionBoundary">&#65279;</span></p><p><br/></p>';
 
         $scope.getTasks = function () {
 
@@ -59,8 +57,53 @@ angular.module("TaskApp", ['textAngular'])
             $scope.$apply();
         };
 
+
+        /*
+
+         ============== Document ==============
+
+         */
+
+        $scope.textContent = '';
+
+        $scope.getDocument = function () {
+
+            $http.get("http://" + address + "/document")
+                .then(function (success) {
+
+                    $scope.textContent = success.data;
+
+                }, function (error) {
+
+                });
+
+        };
+
         $scope.$watch('textContent', function () {
-            console.log($scope.textContent);
+
+            $http.post("http://" + address + "/document", $scope.textContent)
+                .then(function () {
+
+                }, function (error) {
+
+                });
         });
+
+        // WebSocket Initialization
+        var documentSocket = new WebSocket("ws://" + address + "/channel/document");
+
+        documentSocket.onmessage = function (message) {
+            $scope.textContent = JSON.parse(message.data);
+            $scope.$apply();
+        };
+
+        documentSocket.onclose = function () {
+            $scope.message = {
+                type: "danger",
+                short: "Socket error",
+                long: "An error occured with the WebSocket."
+            };
+            $scope.$apply();
+        };
 
     });
