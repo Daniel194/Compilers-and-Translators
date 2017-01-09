@@ -19,98 +19,18 @@
 </head>
 <body ng-controller="TaskController">
 <div class="container">
-    <h1>Real-time application
-        <small>part 3</small>
-    </h1>
+    <h1>Docs</h1>
 
     <div ng-show="message" class="alert alert-{{message.type}}">
         <strong>
             {{message.short}}: {{message.long}}
         </strong>
     </div>
-    <div class="container-fluid">
-        <div class="col-md-6 col-sm-12">
-            <h2>Add task</h2>
-            <form>
-                <div class="row">
-                    <div class="form-group">
-                        <label for="taskTitleFieldId">Title: </label>
-                        <input type="text" id="taskTitleFieldId"
-                               ng-model="task.title"
-                               class="form-control"/>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="form-group">
-                        <label for="taskDescriptionFieldId">
-                            Description:
-                        </label>
-                        <textarea id="taskDescriptionFieldId"
-                                  ng-model="task.description"
-                                  class="form-control">
-                                </textarea>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="form-group">
-                        <label for="durationFieldId">
-                            Duration (in seconds):
-                        </label>
-                        <input type="number" id="durationFieldId"
-                               class="form-control"
-                               ng-model="task.duration"/>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"
-                                       id="taskUniversalCheckId"
-                                       ng-model="task.universal"/>
-                                Public task
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <button type="button"
-                                class="btn btn-success"
-                                ng-click="addTask()">
-                            Add task
-                        </button>
-                        <button type="button"
-                                class="btn btn-default"
-                                ng-click="resetTask()">
-                            Reset form
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="col-md-6 col-sm-12">
-            <h2>Listing</h2>
-            <ul class="list-group" ng-hide="tasks.length == 0">
-                <li ng-repeat="curTask in tasks track by $index"
-                    class="list-group-item">
-                    <strong>{{curTask.title}}</strong> - {{curTask.description}}
-                    <span class="badge">{{curTask.duration}}</span>
-                </li>
-            </ul>
-            <p ng-show="tasks.length == 0" class="text-info">
-                No tasks to display.
-            </p>
-        </div>
+    <div class="rich-text-area">
+        <text-angular ng-model="document.text"></text-angular>
     </div>
 </div>
-
-<div class="rich-text-area">
-    <text-angular ng-model="document.text"></text-angular>
-</div>
-
 </body>
 </html>

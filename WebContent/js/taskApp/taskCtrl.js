@@ -2,68 +2,6 @@ angular.module("TaskApp", ['textAngular'])
     .controller("TaskController", function ($http, $scope) {
         var address = window.location.hostname + ":" + window.location.port;
 
-        $scope.getTasks = function () {
-
-            $http.get("http://" + address + "/tasks")
-                .then(function (success) {
-
-                    $scope.tasks = success.data;
-
-                }, function (error) {
-
-                });
-
-        };
-
-        $scope.addTask = function () {
-
-            $http.post("http://" + address + "/tasks", $scope.task)
-                .then(function () {
-
-                    $scope.resetTask();
-
-                }, function (error) {
-
-                });
-
-        };
-
-        $scope.resetTask = function () {
-            $scope.task = {
-                title: "",
-                description: "",
-                duration: "",
-                universal: true
-            };
-        };
-
-        $scope.resetTask();
-        $scope.getTasks();
-
-        // WebSocket Initialization
-        var taskSocket = new WebSocket("ws://" + address + "/channel/task");
-
-        taskSocket.onmessage = function (message) {
-            $scope.tasks = JSON.parse(message.data);
-            $scope.$apply();
-        };
-
-        taskSocket.onclose = function () {
-            $scope.message = {
-                type: "danger",
-                short: "Socket error",
-                long: "An error occured with the WebSocket."
-            };
-            $scope.$apply();
-        };
-
-
-        /*
-
-         ============== Document ==============
-
-         */
-
         $scope.document = {};
         $scope.document.text = '';
 
@@ -74,8 +12,8 @@ angular.module("TaskApp", ['textAngular'])
 
                     $scope.document = success.data;
 
-                }, function (error) {
-
+                }, function () {
+                    //Empty
                 });
 
         };
@@ -84,9 +22,9 @@ angular.module("TaskApp", ['textAngular'])
 
             $http.post("http://" + address + "/document", $scope.document)
                 .then(function () {
-
-                }, function (error) {
-
+                    //Empty
+                }, function () {
+                    //Empty
                 });
         });
 
