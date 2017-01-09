@@ -1,11 +1,10 @@
-package ro.doc.task.repository;
+package ro.doc.repository.document;
 
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ro.doc.repository.DocumentAppRepository;
-import ro.doc.task.domain.Document;
+import ro.doc.entities.Document;
 
 import javax.annotation.PostConstruct;
 

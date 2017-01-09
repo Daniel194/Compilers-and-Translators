@@ -1,9 +1,10 @@
-package ro.doc.task.repository;
+package ro.doc.repository.document;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ro.doc.task.websocket.broadcaster.DocumentBroadcaster;
+import ro.doc.repository.document.DocumentRepository;
+import ro.doc.websocket.broadcaster.DocumentBroadcaster;
 
 import java.util.Collections;
 import java.util.Observable;

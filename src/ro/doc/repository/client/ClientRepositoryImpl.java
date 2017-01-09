@@ -1,4 +1,4 @@
-package ro.doc.client.repository;
+package ro.doc.repository.client;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -6,7 +6,8 @@ import java.util.function.Consumer;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
-import ro.doc.client.domain.Client;
+import ro.doc.entities.Client;
+import ro.doc.repository.client.ClientRepository;
 
 
 @Repository

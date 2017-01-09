@@ -2,11 +2,11 @@ package ro.doc.config;
  
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
  
-public class TaskAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
  
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] { TaskAppConfig.class };
+        return new Class[] { AppConfig.class };
     }
   
     @Override

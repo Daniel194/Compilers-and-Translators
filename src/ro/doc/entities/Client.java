@@ -1,4 +1,4 @@
-package ro.doc.client.domain;
+package ro.doc.entities;
 
 import java.io.IOException;
 

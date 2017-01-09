@@ -1,12 +1,11 @@
-package ro.doc.task.websocket.broadcaster;
+package ro.doc.websocket.broadcaster;
 
 
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ro.doc.client.repository.ClientRepository;
-import ro.doc.task.domain.Document;
-import ro.doc.websocket.broadcaster.Broadcaster;
+import ro.doc.repository.client.ClientRepository;
+import ro.doc.entities.Document;
 
 import javax.annotation.PostConstruct;
 import java.util.List;

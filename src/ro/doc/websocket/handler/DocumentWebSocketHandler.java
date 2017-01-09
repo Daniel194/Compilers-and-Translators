@@ -1,9 +1,9 @@
-package ro.doc.task.websocket.handler;
+package ro.doc.websocket.handler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.server.standard.SpringConfigurator;
-import ro.doc.client.domain.Client;
-import ro.doc.client.repository.ClientRepository;
+import ro.doc.entities.Client;
+import ro.doc.repository.client.ClientRepository;
 
 import javax.websocket.CloseReason;
 import javax.websocket.OnClose;

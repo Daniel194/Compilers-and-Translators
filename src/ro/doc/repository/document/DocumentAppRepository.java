@@ -1,4 +1,4 @@
-package ro.doc.repository;
+package ro.doc.repository.document;
 
 
 import java.util.Observable;

@@ -1,7 +1,7 @@
-package ro.doc.task.domain;
+package ro.doc.entities;
 
 
-import ro.doc.client.domain.Client;
+import ro.doc.entities.Client;
 
 public class Document {
     private String id;

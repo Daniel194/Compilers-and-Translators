@@ -1,9 +1,9 @@
-package ro.doc.task.controller;
+package ro.doc.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ro.doc.task.domain.Document;
-import ro.doc.task.repository.DocumentRepository;
+import ro.doc.entities.Document;
+import ro.doc.repository.document.DocumentRepository;
 
 @RestController
 public class DocumentRestController {
