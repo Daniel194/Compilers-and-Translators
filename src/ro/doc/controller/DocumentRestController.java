@@ -14,12 +14,12 @@ public class DocumentRestController {
     @RequestMapping(path = "/document", method = RequestMethod.GET)
     @ResponseBody
     public Document getTasks() {
-        return documentRepository.getDocument();
+        return documentRepository.getAll().get(0);
     }
 
     @RequestMapping(path = "/document", method = RequestMethod.POST)
     public void addTask(@RequestBody Document document) {
-        documentRepository.setDocument(document);
+        documentRepository.add(document);
     }
 
 }

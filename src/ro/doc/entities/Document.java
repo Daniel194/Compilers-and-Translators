@@ -1,8 +1,6 @@
 package ro.doc.entities;
 
 
-import ro.doc.entities.Client;
-
 public class Document {
     private String id;
     private Client owner;
