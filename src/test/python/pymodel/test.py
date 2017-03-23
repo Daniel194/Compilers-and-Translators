@@ -1,19 +1,32 @@
+"""
+PowerSwitch graphics tests
+"""
+
 cases = [
-    ('PowerOn, PowerOff alternate due to enabling conditions',
-     'pmt -n 10 PowerSwitch'),
+    ('Generate FSM from PowerSwitch model program',
+     'pma PowerSwitch'),
 
-    ('PowerOn, PowerOff alternate, end in non-accepting state',
-     'pmt -n 3 PowerSwitch'),
+    ('Generate dot graphics commands from generated PowerSwitchFSM',
+     'pmg PowerSwitchFSM'),
 
-    ('Same as above but add -c cleanup option to reach accepting state',
-     'pmt -n 3 -c 3 PowerSwitch'),
+    ('Generate SVG file from dot commands',
+     'dotsvg PowerSwitchFSM'),
 
-    ('Use -a option so only PowerOn action is included, can only execute once',
-     'pmt -n 10 -a PowerOn PowerSwitch'),
+    ('Generate dot commands from SpeedControl FSM',
+     'pmg SpeedControl'),
 
-    ('Use -e option so PowerOff action is excluded, PowerOn can only execute once',
-     'pmt -n 10 -e PowerOff PowerSwitch'),
+    ('Generate SVG file from dot commands',
+     'dotsvg SpeedControl'),
 
-    ('Use -r option for multiple runs, notice run after PowerOn also starts with PowerOn',
-     'pmt -n 3 -r 2 PowerSwitch')
+    ('Generate FSM from composition of PowerSwitch and SpeedControl, show interleaving',
+     'pma SpeedControl PowerSwitch -o PowerSpeed'),
+
+    ('Generate dot commands from composed FSM',
+     'pmg PowerSpeed'),
+
+    ('Generate SVG from dot',
+     'dotsvg PowerSpeed')
+
+    # Now you can display PowerSwitch.svg, SpeedControl.svg and PowerSpeed.svg 
+    # in three browser tabs
 ]
