@@ -23,4 +23,3 @@ cases = [
 
     # Now display svg files in a browser
 ]
-    
