@@ -1,9 +1,5 @@
-# pma --maxTransitions 100 --output SpeedControl SpeedControl
-# 3 states, 3 transitions, 1 accepting states, 0 unsafe states, 0 finished and 0 deadend states
-
-# actions here are just labels, but must be symbols with __name__ attribute
-
-def IncrementSpeed(): pass
+def IncrementSpeed():
+    pass
 
 
 # states, key of each state here is its number in graph etc. below

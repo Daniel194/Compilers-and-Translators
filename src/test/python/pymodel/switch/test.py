@@ -1,7 +1,3 @@
-"""
-PowerSwitch graphics tests
-"""
-
 cases = [
     ('Generate FSM from PowerSwitch model program',
      'pma PowerSwitch'),
@@ -26,7 +22,4 @@ cases = [
 
     ('Generate SVG from dot',
      'dotsvg PowerSpeed')
-
-    # Now you can display PowerSwitch.svg, SpeedControl.svg and PowerSpeed.svg 
-    # in three browser tabs
 ]

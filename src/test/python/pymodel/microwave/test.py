@@ -1,7 +1,3 @@
-"""
-oven graphics tests, showing unsafe states
-"""
-
 cases = [
     ('Generate FSM from unsafe_oven program',
      'pma unsafe_oven'),
@@ -21,5 +17,4 @@ cases = [
     ('Generate SVG file from dot commands',
      'dotsvg ovenFSM'),
 
-    # Now display svg files in a browser
 ]

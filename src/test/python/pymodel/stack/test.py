@@ -1,7 +1,3 @@
-"""
-Test Stack graphics
-"""
-
 cases = [
     ('Generate FSM',
      'pma Stack'),

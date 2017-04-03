@@ -1,7 +1,3 @@
-"""
-Stack, here Pop result is return value, not argument
-"""
-
 ### Model
 
 # State
@@ -41,7 +37,7 @@ domains = {Push: {'x': [1, 2]}}
 
 
 def StateFilter():
-    return len(stack) < 4
+    return len(stack) < 5
 
 
 # needed for multiple test runs

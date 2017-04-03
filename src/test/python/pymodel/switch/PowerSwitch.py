@@ -1,7 +1,3 @@
-"""
-PowerSwitch, based on C# example at nmodel.codeplex.com, model program page
-"""
-
 ### Model
 
 # State

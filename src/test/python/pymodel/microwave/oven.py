@@ -1,10 +1,3 @@
-"""
-Microwave oven - safe version
-Safety requirement: the power should only be on when the door is closed 
-Using implication operator => :  power == 'On' => door == 'Closed'
-No built-in => operator, use equivalent: power == 'Off' or door == 'Closed'
-"""
-
 ### Model
 
 # state
@@ -69,7 +62,6 @@ def state_invariant():
     """
     Safety requirement: power == 'On' => door == 'Closed'
     """
-    # p => q can be expressed:  not p or q
     return power == 'Off' or door == 'Closed'
 
 
