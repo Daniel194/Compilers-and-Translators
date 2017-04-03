@@ -51,4 +51,19 @@ public class ProiectIndividualTest {
         assertFalse(existPairNumbers(1001, 2, new int[]{500, 501}, 1));
     }
 
+    @Test
+    public void categoryPartitioning() {
+        int[] c13 = ArrayUtils.addAll(new int[]{2, 3}, IntStream.rangeClosed(1, 99).map(x -> x = 1).toArray());
+
+        assertTrue(existPairNumbers(5, 3, new int[]{1, 2, 3}, 1));
+        assertFalse(existPairNumbers(5, 3, new int[]{1, 2, 3}, -1));
+        assertFalse(existPairNumbers(5, 3, new int[]{1, 2, 3}, 2));
+        assertFalse(existPairNumbers(5, 4, new int[]{1, 2, 3}, 1));
+        assertFalse(existPairNumbers(5, 1, new int[]{5}, 1));
+        assertFalse(existPairNumbers(5, 101, c13, 1));
+        assertFalse(existPairNumbers(-1001, 2, new int[]{-500, -501}, 1));
+        assertFalse(existPairNumbers(1001, 2, new int[]{500, 501}, 1));
+
+    }
+
 }
