@@ -66,4 +66,12 @@ public class ProiectIndividualTest {
 
     }
 
+    @Test
+    public void statementCoverage() {
+        assertFalse(existPairNumbers(1001, 1, new int[]{}, 2));
+        assertFalse(existPairNumbers(1001, 2, new int[]{3, 2}, 1));
+        assertFalse(existPairNumbers(5, 3, new int[]{3, 2}, 1));
+        assertTrue(existPairNumbers(5, 2, new int[]{3, 2}, 1));
+    }
+
 }
