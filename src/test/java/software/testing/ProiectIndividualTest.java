@@ -96,4 +96,12 @@ public class ProiectIndividualTest {
         assertTrue(existPairNumbers(5, 2, new int[]{3, 2}, 1));
     }
 
+    @Test
+    public void pathCoverage() {
+        assertFalse(existPairNumbers(1, 1, new int[]{1}, 1));
+        assertFalse(existPairNumbers(-2000, 2, new int[]{-1000, -1000}, 1));
+        assertFalse(existPairNumbers(5, 3, new int[]{3, 2}, 1));
+        assertTrue(existPairNumbers(5, 2, new int[]{3, 2}, 1));
+    }
+
 }
