@@ -82,4 +82,18 @@ public class ProiectIndividualTest {
         assertFalse(existPairNumbers(5, 2, new int[]{3, 2}, 0));
     }
 
+    @Test
+    public void conditionCoverage() {
+        int[] c2 = ArrayUtils.addAll(new int[]{2, 3}, IntStream.rangeClosed(1, 99).map(x -> x = 1).toArray());
+
+        assertFalse(existPairNumbers(1, 1, new int[]{1}, 1));
+        assertFalse(existPairNumbers(5, 101, c2, 1));
+        assertFalse(existPairNumbers(1, 1, new int[]{1}, -1));
+        assertFalse(existPairNumbers(5, 2, new int[]{3, 2}, 2));
+        assertFalse(existPairNumbers(2000, 2, new int[]{1000, 1000}, 1));
+        assertFalse(existPairNumbers(-2000, 2, new int[]{-1000, -1000}, 1));
+        assertFalse(existPairNumbers(5, 3, new int[]{3, 2}, 1));
+        assertTrue(existPairNumbers(5, 2, new int[]{3, 2}, 1));
+    }
+
 }
