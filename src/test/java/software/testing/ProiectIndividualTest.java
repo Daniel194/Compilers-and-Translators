@@ -74,4 +74,12 @@ public class ProiectIndividualTest {
         assertTrue(existPairNumbers(5, 2, new int[]{3, 2}, 1));
     }
 
+    @Test
+    public void branchCoverage() {
+        assertFalse(existPairNumbers(5, 0, new int[]{}, 0));
+        assertFalse(existPairNumbers(2000, 2, new int[]{1000, 1000}, 1));
+        assertFalse(existPairNumbers(2000, 3, new int[]{1000, 1000}, 1));
+        assertFalse(existPairNumbers(5, 2, new int[]{3, 2}, 0));
+    }
+
 }
