@@ -1,4 +1,6 @@
-INTEGER, PLUS, MINUS, MULTIPLICATION, DIVISION, MODULO, EOF = 'INTEGER', 'PLUS', 'MINUS', 'MULTIPLICATION', 'DIVISION', 'MODULO', 'EOF'
+INTEGER, PLUS, MINUS, MUL, DIV, EOF = (
+    'INTEGER', 'PLUS', 'MINUS', 'MUL', 'DIV', 'EOF'
+)
 
 
 class Token(object):
@@ -16,21 +18,19 @@ class Token(object):
         return self.__str__()
 
 
-class Interpreter(object):
+class Lexer(object):
     def __init__(self, text):
         self.text = text
         self.pos = 0
-        self.current_token = None
         self.current_char = self.text[self.pos]
 
     def error(self):
-        raise Exception('Error parsing input')
+        raise Exception('Invalid character')
 
     def advance(self):
         self.pos += 1
-
         if self.pos > len(self.text) - 1:
-            self.current_char = None
+            self.current_char = None  # Indicates end of input
         else:
             self.current_char = self.text[self.pos]
 
@@ -39,13 +39,10 @@ class Interpreter(object):
             self.advance()
 
     def integer(self):
-
         result = ''
-
         while self.current_char is not None and self.current_char.isdigit():
             result += self.current_char
             self.advance()
-
         return int(result)
 
     def get_next_token(self):
@@ -69,59 +66,61 @@ class Interpreter(object):
 
             if self.current_char == '*':
                 self.advance()
-                return Token(MULTIPLICATION, '*')
+                return Token(MUL, '*')
 
             if self.current_char == '/':
                 self.advance()
-                return Token(DIVISION, '/')
-
-            if self.current_char == '%':
-                self.advance()
-                return Token(MODULO, '%')
+                return Token(DIV, '/')
 
             self.error()
 
         return Token(EOF, None)
 
-    def eat(self, token_type):
 
+class Interpreter(object):
+    def __init__(self, lexer):
+        self.lexer = lexer
+        self.current_token = self.lexer.get_next_token()
+
+    def error(self):
+        raise Exception('Invalid syntax')
+
+    def eat(self, token_type):
         if self.current_token.type == token_type:
-            self.current_token = self.get_next_token()
+            self.current_token = self.lexer.get_next_token()
         else:
             self.error()
 
+    def factor(self):
+        token = self.current_token
+        self.eat(INTEGER)
+        return token.value
+
+    def term(self):
+        result = self.factor()
+
+        while self.current_token.type in (MUL, DIV):
+            token = self.current_token
+            if token.type == MUL:
+                self.eat(MUL)
+                result = result * self.factor()
+            elif token.type == DIV:
+                self.eat(DIV)
+                result = result / self.factor()
+
+        return result
+
     def expr(self):
-        self.current_token = self.get_next_token()
+        result = self.term()
 
-        left = self.current_token
-        self.eat(INTEGER)
-
-        op = self.current_token
-
-        if op.type == PLUS:
-            self.eat(PLUS)
-        elif op.type == MINUS:
-            self.eat(MINUS)
-        elif op.type == MULTIPLICATION:
-            self.eat(MULTIPLICATION)
-        elif op.type == DIVISION:
-            self.eat(DIVISION)
-        elif op.type == MODULO:
-            self.eat(MODULO)
-
-        right = self.current_token
-        self.eat(INTEGER)
-
-        if op.type == PLUS:
-            result = left.value + right.value
-        elif op.type == MINUS:
-            result = left.value - right.value
-        elif op.type == MULTIPLICATION:
-            result = left.value * right.value
-        elif op.type == DIVISION:
-            result = left.value / right.value
-        else:
-            result = left.value % right.value
+        while self.current_token.type in (PLUS, MINUS):
+            token = self.current_token
+            if token.type == PLUS:
+                self.eat(PLUS)
+                result = result + self.term()
+            elif token.type == MINUS:
+                self.eat(MINUS)
+                result = result - self.term()
 
         return result
 
@@ -135,7 +134,8 @@ def main():
         if not text:
             continue
 
-        interpreter = Interpreter(text)
+        lexer = Lexer(text)
+        interpreter = Interpreter(lexer)
         result = interpreter.expr()
         print(result)
 
