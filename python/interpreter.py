@@ -125,20 +125,13 @@ class Interpreter(object):
         return result
 
 
-def main():
-    while True:
-        try:
-            text = input('calc> ')
-        except EOFError:
-            break
-        if not text:
-            continue
-
-        lexer = Lexer(text)
-        interpreter = Interpreter(lexer)
-        result = interpreter.expr()
-        print(result)
-
-
 if __name__ == '__main__':
-    main()
+    with open("test.txt") as f:
+        for line in f:
+            line = line.replace('\n', '')
+
+            lexer = Lexer(line)
+            interpreter = Interpreter(lexer)
+            result = interpreter.expr()
+
+            print(line, " = ", result)
