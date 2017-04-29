@@ -30,7 +30,7 @@ class Lexer(object):
     def advance(self):
         self.pos += 1
         if self.pos > len(self.text) - 1:
-            self.current_char = None  # Indicates end of input
+            self.current_char = None
         else:
             self.current_char = self.text[self.pos]
 
@@ -85,7 +85,7 @@ class Interpreter(object):
     def error(self):
         raise Exception('Invalid syntax')
 
-    def eat(self, token_type):
+    def expected(self, token_type):
         if self.current_token.type == token_type:
             self.current_token = self.lexer.get_next_token()
         else:
@@ -93,7 +93,7 @@ class Interpreter(object):
 
     def factor(self):
         token = self.current_token
-        self.eat(INTEGER)
+        self.expected(INTEGER)
         return token.value
 
     def term(self):
@@ -102,10 +102,10 @@ class Interpreter(object):
         while self.current_token.type in (MUL, DIV):
             token = self.current_token
             if token.type == MUL:
-                self.eat(MUL)
+                self.expected(MUL)
                 result = result * self.factor()
             elif token.type == DIV:
-                self.eat(DIV)
+                self.expected(DIV)
                 result = result / self.factor()
 
         return result
@@ -116,10 +116,10 @@ class Interpreter(object):
         while self.current_token.type in (PLUS, MINUS):
             token = self.current_token
             if token.type == PLUS:
-                self.eat(PLUS)
+                self.expected(PLUS)
                 result = result + self.term()
             elif token.type == MINUS:
-                self.eat(MINUS)
+                self.expected(MINUS)
                 result = result - self.term()
 
         return result
