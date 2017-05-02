@@ -19,15 +19,14 @@ class Comments(object):
                 self.proces_com_star()
 
     def proces_normal_state(self):
-        if self.text[self.pos] == '/' and len(self.text) > self.pos + 1:
+        if self.text[self.pos] == '/' and len(self.text) > self.pos + 1 and self.text[self.pos + 1] == '/':
+            self.actual_sate = self.COM_SLASH
+            print('Comentariu cu // \n')
+            self.pos += 2
 
-            if self.text[self.pos + 1] == '/':
-                self.actual_sate = self.COM_SLASH
-                print('Comentariu cu // \n')
-            elif self.text[self.pos + 1] == '*':
-                self.actual_sate = self.COM_STAR
-                print('Comentariu cu /* \n')
-
+        elif self.text[self.pos] == '/' and len(self.text) > self.pos + 1 and self.text[self.pos + 1] == '*':
+            self.actual_sate = self.COM_STAR
+            print('Comentariu cu /* \n')
             self.pos += 2
 
         elif self.text[self.pos] != ' ' and self.text[self.pos] != '\n' and self.text[self.pos] != '\r':
