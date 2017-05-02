@@ -1,28 +1,9 @@
-//**  **/*//*/   /*a   bc**///* hello how low /*asd */
+// comnetariu1
 
-/*/*/* //
+/* comentariu2 */
 
-dasdas
+/*
 
-*/d   c /**/d//
-//comentariu
-myLit /*co
-m
+comentariu 3
 
-e    /* /ntariu*/_afsc salut //riu/*asdasdasdasd/*//**/
-//comentariu2
-avcd/*anc
-def
-fgh
-
-ghy*/
-/**/
-ab//bla bla
-cd
-
-/*anc
-def
-fgh
-
-ghy*/
-//a
+*/
