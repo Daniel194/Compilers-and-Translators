@@ -126,7 +126,7 @@ class Interpreter(object):
 
 
 if __name__ == '__main__':
-    with open("test.txt") as f:
+    with open("test_interpreter.txt") as f:
         for line in f:
             line = line.replace('\n', '')
 
