@@ -1,9 +1,19 @@
-// comnetariu1
+/**//*/*//*//**////*
+  //
+*/  / **/ //**//
+//*
 
-/* comentariu2 */
+*//*
 
-/*
+*//**//
 
-comentariu 3
+ab//bla bla
+cd
 
-*/
+/*anc
+def
+fgh
+
+ghy*/
+//
+a/*
