@@ -19,20 +19,31 @@ class Comments(object):
             elif self.actual_sate == self.COM_STAR:
                 self.proces_com_star()
 
+        if self.actual_sate == self.COM_STAR:
+            print('EROARE: /')
+            print('----------------------------------------------')
+            print('EROARE: *')
+
+            for i in range(self.star_pos, self.pos):
+                print('----------------------------------------------')
+                print('EROARE:', self.text[i])
+
     def proces_normal_state(self):
         if self.text[self.pos] == '/' and len(self.text) > self.pos + 1 and self.text[self.pos + 1] == '/':
             self.actual_sate = self.COM_SLASH
-            print('Comentariu cu //')
+            print('----------------------------------------------')
             self.pos += 2
             self.star_pos = self.pos
 
         elif self.text[self.pos] == '/' and len(self.text) > self.pos + 1 and self.text[self.pos + 1] == '*':
             self.actual_sate = self.COM_STAR
-            print('Inceput comentariu cu /*')
+            print('----------------------------------------------')
             self.pos += 2
             self.star_pos = self.pos
 
         elif self.text[self.pos] != ' ' and self.text[self.pos] != '\n' and self.text[self.pos] != '\r':
+            print('----------------------------------------------')
+
             print('EROARE : ', self.text[self.pos])
             self.pos += 1
 
@@ -42,17 +53,16 @@ class Comments(object):
     def proces_com_slash(self):
         if self.text[self.pos] == '\n':
             self.actual_sate = self.NOMRAL
-            print('Continutul cometariului pe o singura linie : ', self.text[self.star_pos: self.pos], '\n')
+            txt = '//' + self.text[self.star_pos: self.pos]
+            print(txt)
 
         self.pos += 1
 
     def proces_com_star(self):
         if self.text[self.pos] == '*' and len(self.text) > self.pos + 1 and self.text[self.pos + 1] == '/':
             self.actual_sate = self.NOMRAL
-            print('Continutul comentariului pe mai multe linii : ', self.text[self.star_pos: self.pos])
-
-            print('Sfarsit comentariu */ \n')
-
+            txt = '/*' + self.text[self.star_pos: self.pos] + '*/'
+            print(txt)
             self.pos += 2
         else:
             self.pos += 1
