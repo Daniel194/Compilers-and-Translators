@@ -1,0 +1,6 @@
+INTEGER = 'INTEGER'
+PLUS = 'PLUS'
+MINUS = 'MINUS'
+MUL = 'MUL'
+DIV = 'DIV'
+EOF = 'EOF'
