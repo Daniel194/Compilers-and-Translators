@@ -1,4 +1,4 @@
-from ast import AST
+from ast.ast import AST
 
 
 class Num(AST):
