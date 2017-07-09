@@ -17,8 +17,14 @@ class Interpreter(object):
 
     def factor(self):
         token = self.current_token
-        self.expected(INTEGER)
-        return token.value
+        if token.type == INTEGER:
+            self.expected(INTEGER)
+            return token.value
+        elif token.type == LPAREN:
+            self.expected(LPAREN)
+            result = self.expr()
+            self.expected(RPAREN)
+            return result
 
     def term(self):
         result = self.factor()
