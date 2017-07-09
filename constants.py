@@ -10,5 +10,5 @@ END = 'END'
 DOT = 'DOT'
 ASSIGN = ':='
 SEMI = ';'
-
+ID = 'ID'
 EOF = 'EOF'
