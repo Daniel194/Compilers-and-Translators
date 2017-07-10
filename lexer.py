@@ -2,6 +2,11 @@ from token import Token
 from constants import *
 
 RESERVED_KEYWORDS = {
+    'PROGRAM': Token('PROGRAM', 'PROGRAM'),
+    'VAR': Token('VAR', 'VAR'),
+    'DIV': Token('INTEGER_DIV', 'DIV'),
+    'INTEGER': Token('INTEGER', 'INTEGER'),
+    'REAL': Token('REAL', 'REAL'),
     'BEGIN': Token('BEGIN', 'BEGIN'),
     'END': Token('END', 'END'),
 }
@@ -26,6 +31,34 @@ class Lexer(object):
     def skip_whitespace(self):
         while self.current_char is not None and self.current_char.isspace():
             self.advance()
+
+    def skip_comment(self):
+        while self.current_char != '}':
+            self.advance()
+        self.advance()
+
+    def number(self):
+        result = ''
+        while self.current_char is not None and self.current_char.isdigit():
+            result += self.current_char
+            self.advance()
+
+        if self.current_char == '.':
+            result += self.current_char
+            self.advance()
+
+            while (
+                            self.current_char is not None and
+                        self.current_char.isdigit()
+            ):
+                result += self.current_char
+                self.advance()
+
+            token = Token('REAL_CONST', float(result))
+        else:
+            token = Token('INTEGER_CONST', int(result))
+
+        return token
 
     def integer(self):
         result = ''
@@ -100,6 +133,26 @@ class Lexer(object):
             if self.current_char == '.':
                 self.advance()
                 return Token(DOT, '.')
+
+            if self.current_char == '{':
+                self.advance()
+                self.skip_comment()
+                continue
+
+            if self.current_char.isdigit():
+                return self.number()
+
+            if self.current_char == ':':
+                self.advance()
+                return Token(COLON, ':')
+
+            if self.current_char == ',':
+                self.advance()
+                return Token(COMMA, ',')
+
+            if self.current_char == '/':
+                self.advance()
+                return Token(FLOAT_DIV, '/')
 
             self.error()
 
