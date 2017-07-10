@@ -10,3 +10,6 @@ if __name__ == '__main__':
         parser = Parser(lexer)
         interpreter = Interpreter(parser)
         result = interpreter.interpret()
+
+        for k, v in sorted(interpreter.GLOBAL_SCOPE.items()):
+            print('%s = %s' % (k, v))
