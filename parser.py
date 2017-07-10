@@ -6,6 +6,10 @@ from ast.assign import Assign
 from ast.compound import Compound
 from ast.var import Var
 from ast.no_op import NoOp
+from ast.block import Block
+from ast.var_decl import VarDecl
+from ast.type import Type
+from ast.program import Program
 
 
 class Parser(object):
@@ -32,8 +36,11 @@ class Parser(object):
             self.eat(MINUS)
             node = UnaryOp(token, self.factor())
             return node
-        elif token.type == INTEGER:
-            self.eat(INTEGER)
+        elif token.type == INTEGER_CONST:
+            self.eat(INTEGER_CONST)
+            return Num(token)
+        elif token.type == REAL_CONST:
+            self.eat(REAL_CONST)
             return Num(token)
         elif token.type == LPAREN:
             self.eat(LPAREN)
@@ -47,12 +54,14 @@ class Parser(object):
     def term(self):
         node = self.factor()
 
-        while self.current_token.type in (MUL, DIV):
+        while self.current_token.type in (MUL, INTEGER_DIV, FLOAT_DIV):
             token = self.current_token
             if token.type == MUL:
                 self.eat(MUL)
-            elif token.type == DIV:
-                self.eat(DIV)
+            elif token.type == INTEGER_DIV:
+                self.eat(INTEGER_DIV)
+            elif token.type == FLOAT_DIV:
+                self.eat(FLOAT_DIV)
 
             node = BinOp(left=node, op=token, right=self.factor())
 
@@ -70,11 +79,6 @@ class Parser(object):
 
             node = BinOp(left=node, op=token, right=self.term())
 
-        return node
-
-    def program(self):
-        node = self.compound_statement()
-        self.eat(DOT)
         return node
 
     def compound_statement(self):
@@ -127,9 +131,56 @@ class Parser(object):
     def empty(self):
         return NoOp()
 
-    def parse(self):
-        node = self.program()
-        if self.current_token.type != EOF:
-            self.error()
-
+    def block(self):
+        declaration_nodes = self.declarations()
+        compound_statement_node = self.compound_statement()
+        node = Block(declaration_nodes, compound_statement_node)
         return node
+
+    def declarations(self):
+        declarations = []
+        if self.current_token.type == VAR:
+            self.eat(VAR)
+            while self.current_token.type == ID:
+                var_decl = self.variable_declaration()
+                declarations.extend(var_decl)
+                self.eat(SEMI)
+
+        return declarations
+
+    def variable_declaration(self):
+        var_nodes = [Var(self.current_token)]
+        self.eat(ID)
+
+        while self.current_token.type == COMMA:
+            self.eat(COMMA)
+            var_nodes.append(Var(self.current_token))
+            self.eat(ID)
+
+        self.eat(COLON)
+
+        type_node = self.type_spec()
+        var_declarations = [
+            VarDecl(var_node, type_node)
+            for var_node in var_nodes
+        ]
+        return var_declarations
+
+    def type_spec(self):
+        token = self.current_token
+        if self.current_token.type == INTEGER:
+            self.eat(INTEGER)
+        else:
+            self.eat(REAL)
+        node = Type(token)
+        return node
+
+    def program(self):
+        self.eat(PROGRAM)
+        var_node = self.variable()
+        prog_name = var_node.value
+        self.eat(SEMI)
+        block_node = self.block()
+        program_node = Program(prog_name, block_node)
+        self.eat(DOT)
+        return program_node
