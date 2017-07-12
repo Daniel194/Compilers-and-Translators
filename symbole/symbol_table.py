@@ -5,19 +5,23 @@ from symbole.buldin_type_simbole import BuiltinTypeSymbol
 class SymbolTable(object):
     def __init__(self):
         self._symbols = OrderedDict()
-        self._init_builtins()
-
-    def _init_builtins(self):
-        self.define(BuiltinTypeSymbol('INTEGER'))
-        self.define(BuiltinTypeSymbol('REAL'))
 
     def __str__(self):
-        s = 'Symbols: {symbols}'.format(
-            symbols=[value for value in self._symbols.values()]
+        symtab_header = 'Symbol table contents'
+        lines = ['\n', symtab_header, '_' * len(symtab_header)]
+        lines.extend(
+            ('%7s: %r' % (key, value))
+            for key, value in self._symbols.items()
         )
+        lines.append('\n')
+        s = '\n'.join(lines)
         return s
 
     __repr__ = __str__
+
+    def insert(self, symbol):
+        print('Insert: %s' % symbol.name)
+        self._symbols[symbol.name] = symbol
 
     def define(self, symbol):
         print('Define: %s' % symbol)
@@ -26,5 +30,7 @@ class SymbolTable(object):
     def lookup(self, name):
         print('Lookup: %s' % name)
         symbol = self._symbols.get(name)
-        # 'symbol' is either an instance of the Symbol class or 'None'
         return symbol
+
+    def visit_ProcedureDecl(self, node):
+        pass

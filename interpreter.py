@@ -63,6 +63,9 @@ class Interpreter(NodeVisitor):
     def visit_NoOp(self, node):
         pass
 
+    def visit_ProcedureDecl(self, node):
+        pass
+
     def interpret(self):
         tree = self.parser.parse()
         if tree is None:

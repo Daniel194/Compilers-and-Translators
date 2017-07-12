@@ -6,6 +6,10 @@ class VarSymbol(Symbol):
         super(VarSymbol, self).__init__(name, type)
 
     def __str__(self):
-        return '<{name}:{type}>'.format(name=self.name, type=self.type)
+        return "<{class_name}(name='{name}', type='{type}')>".format(
+            class_name=self.__class__.__name__,
+            name=self.name,
+            type=self.type,
+        )
 
     __repr__ = __str__
