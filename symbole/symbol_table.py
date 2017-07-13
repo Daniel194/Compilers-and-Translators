@@ -40,5 +40,4 @@ class SymbolTable(object):
     def lookup(self, name):
         print('Lookup: %s' % name)
         symbol = self._symbols.get(name)
-        # 'symbol' is either an instance of the Symbol class or None
         return symbol
