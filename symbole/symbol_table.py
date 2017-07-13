@@ -3,8 +3,10 @@ from symbole.buldin_type_simbole import BuiltinTypeSymbol
 
 
 class SymbolTable(object):
-    def __init__(self):
+    def __init__(self, scope_name, scope_level):
         self._symbols = OrderedDict()
+        self.scope_name = scope_name
+        self.scope_level = scope_level
         self._init_builtins()
 
     def _init_builtins(self):
@@ -12,8 +14,15 @@ class SymbolTable(object):
         self.insert(BuiltinTypeSymbol('REAL'))
 
     def __str__(self):
-        symtab_header = 'Symbol table contents'
-        lines = ['\n', symtab_header, '_' * len(symtab_header)]
+        h1 = 'SCOPE (SCOPED SYMBOL TABLE)'
+        lines = ['\n', h1, '=' * len(h1)]
+        for header_name, header_value in (
+                ('Scope name', self.scope_name),
+                ('Scope level', self.scope_level),
+        ):
+            lines.append('%-15s: %s' % (header_name, header_value))
+        h2 = 'Scope (Scoped symbol table) contents'
+        lines.extend([h2, '-' * len(h2)])
         lines.extend(
             ('%7s: %r' % (key, value))
             for key, value in self._symbols.items()
@@ -31,4 +40,5 @@ class SymbolTable(object):
     def lookup(self, name):
         print('Lookup: %s' % name)
         symbol = self._symbols.get(name)
+        # 'symbol' is either an instance of the Symbol class or None
         return symbol
