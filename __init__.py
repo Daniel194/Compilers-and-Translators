@@ -6,9 +6,10 @@ INPUT_FILE = "input/test.txt"
 
 if __name__ == '__main__':
     with open(INPUT_FILE) as f:
-        exer = Lexer(f.read())
+        lexer = Lexer(f.read())
         parser = Parser(lexer)
         tree = parser.parse()
+
         semantic_analyzer = SemanticAnalyzer()
         try:
             semantic_analyzer.visit(tree)

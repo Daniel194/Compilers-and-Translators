@@ -42,7 +42,6 @@ class ScopedSymbolTable(object):
 
     def lookup(self, name, current_scope_only=False):
         print('Lookup: %s. (Scope name: %s)' % (name, self.scope_name))
-        # 'symbol' is either an instance of the Symbol class or None
         symbol = self._symbols.get(name)
 
         if symbol is not None:
@@ -51,6 +50,5 @@ class ScopedSymbolTable(object):
         if current_scope_only:
             return None
 
-        # recursively go up the chain and lookup the name
         if self.enclosing_scope is not None:
             return self.enclosing_scope.lookup(name)

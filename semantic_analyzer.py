@@ -18,12 +18,11 @@ class SemanticAnalyzer(NodeVisitor):
         global_scope = ScopedSymbolTable(
             scope_name='global',
             scope_level=1,
-            enclosing_scope=self.current_scope,  # None
+            enclosing_scope=self.current_scope,
         )
         global_scope._init_builtins()
         self.current_scope = global_scope
 
-        # visit subtree
         self.visit(node.block)
 
         print(global_scope)
@@ -48,7 +47,7 @@ class SemanticAnalyzer(NodeVisitor):
         self.current_scope.insert(proc_symbol)
 
         print('ENTER scope: %s' % proc_name)
-        # Scope for parameters and local variables
+
         procedure_scope = ScopedSymbolTable(
             scope_name=proc_name,
             scope_level=self.current_scope.scope_level + 1,
@@ -56,7 +55,6 @@ class SemanticAnalyzer(NodeVisitor):
         )
         self.current_scope = procedure_scope
 
-        # Insert parameters into the procedure scope
         for param in node.params:
             param_type = self.current_scope.lookup(param.type_node.value)
             param_name = param.var_node.value
@@ -75,13 +73,9 @@ class SemanticAnalyzer(NodeVisitor):
         type_name = node.type_node.value
         type_symbol = self.current_scope.lookup(type_name)
 
-        # We have all the information we need to create a variable symbol.
-        # Create the symbol and insert it into the symbol table.
         var_name = node.var_node.value
         var_symbol = VarSymbol(var_name, type_symbol)
 
-        # Signal an error if the table alrady has a symbol
-        # with the same name
         if self.current_scope.lookup(var_name, current_scope_only=True):
             raise Exception(
                 "Error: Duplicate identifier '%s' found" % var_name
@@ -90,9 +84,7 @@ class SemanticAnalyzer(NodeVisitor):
         self.current_scope.insert(var_symbol)
 
     def visit_Assign(self, node):
-        # right-hand side
         self.visit(node.right)
-        # left-hand side
         self.visit(node.left)
 
     def visit_Var(self, node):

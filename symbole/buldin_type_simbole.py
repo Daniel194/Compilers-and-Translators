@@ -8,4 +8,8 @@ class BuiltinTypeSymbol(Symbol):
     def __str__(self):
         return self.name
 
-    __repr__ = __str__
+    def __repr__(self):
+        return "<{class_name}(name='{name}')>".format(
+            class_name=self.__class__.__name__,
+            name=self.name,
+        )
