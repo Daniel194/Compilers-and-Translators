@@ -1,6 +1,6 @@
 from lexer import Lexer
 from parser import Parser
-from semantic_analyzer import SemanticAnalyzer
+from symbole.semantic_analyzer import SemanticAnalyzer
 
 INPUT_FILE = "input/test.txt"
 
