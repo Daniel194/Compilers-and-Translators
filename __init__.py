@@ -1,15 +1,16 @@
 from lexer import Lexer
 from parser import Parser
-from interpreter import Interpreter
+from semantic_analyzer import SemanticAnalyzer
 
 INPUT_FILE = "input/test.txt"
 
 if __name__ == '__main__':
     with open(INPUT_FILE) as f:
-        lexer = Lexer(f.read())
+        exer = Lexer(f.read())
         parser = Parser(lexer)
-        interpreter = Interpreter(parser)
-        result = interpreter.interpret()
-
-        for k, v in sorted(interpreter.GLOBAL_SCOPE.items()):
-            print('%s = %s' % (k, v))
+        tree = parser.parse()
+        semantic_analyzer = SemanticAnalyzer()
+        try:
+            semantic_analyzer.visit(tree)
+        except Exception as e:
+            print(e)
