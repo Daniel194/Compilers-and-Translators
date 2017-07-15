@@ -10,6 +10,7 @@ from ast.block import Block
 from ast.var_decl import VarDecl
 from ast.type import Type
 from ast.program import Program
+from ast.param import Param
 from ast.procedure_decl import ProcedureDecl
 
 
@@ -45,17 +46,71 @@ class Parser(object):
 
     def declarations(self):
         declarations = []
-        if self.current_token.type == VAR:
-            self.eat(VAR)
-            while self.current_token.type == ID:
-                var_decl = self.variable_declaration()
-                declarations.extend(var_decl)
+
+        while True:
+            if self.current_token.type == VAR:
+                self.eat(VAR)
+                while self.current_token.type == ID:
+                    var_decl = self.variable_declaration()
+                    declarations.extend(var_decl)
+                    self.eat(SEMI)
+
+            elif self.current_token.type == PROCEDURE:
+                self.eat(PROCEDURE)
+                proc_name = self.current_token.value
+                self.eat(ID)
+                params = []
+
+                if self.current_token.type == LPAREN:
+                    self.eat(LPAREN)
+
+                    params = self.formal_parameter_list()
+
+                    self.eat(RPAREN)
+
                 self.eat(SEMI)
+                block_node = self.block()
+                proc_decl = ProcedureDecl(proc_name, params, block_node)
+                declarations.append(proc_decl)
+                self.eat(SEMI)
+            else:
+                break
 
         return declarations
 
+    def formal_parameters(self):
+        param_nodes = []
+
+        param_tokens = [self.current_token]
+        self.eat(ID)
+        while self.current_token.type == COMMA:
+            self.eat(COMMA)
+            param_tokens.append(self.current_token)
+            self.eat(ID)
+
+        self.eat(COLON)
+        type_node = self.type_spec()
+
+        for param_token in param_tokens:
+            param_node = Param(Var(param_token), type_node)
+            param_nodes.append(param_node)
+
+        return param_nodes
+
+    def formal_parameter_list(self):
+        if not self.current_token.type == ID:
+            return []
+
+        param_nodes = self.formal_parameters()
+
+        while self.current_token.type == SEMI:
+            self.eat(SEMI)
+            param_nodes.extend(self.formal_parameters())
+
+        return param_nodes
+
     def variable_declaration(self):
-        var_nodes = [Var(self.current_token)]
+        var_nodes = [Var(self.current_token)]  # first ID
         self.eat(ID)
 
         while self.current_token.type == COMMA:
@@ -182,32 +237,6 @@ class Parser(object):
         else:
             node = self.variable()
             return node
-
-    def declarations(self):
-        """declarations : VAR (variable_declaration SEMI)+
-                        | (PROCEDURE ID SEMI block SEMI)*
-                        | empty
-        """
-        declarations = []
-
-        if self.current_token.type == VAR:
-            self.eat(VAR)
-            while self.current_token.type == ID:
-                var_decl = self.variable_declaration()
-                declarations.extend(var_decl)
-                self.eat(SEMI)
-
-        while self.current_token.type == PROCEDURE:
-            self.eat(PROCEDURE)
-            proc_name = self.current_token.value
-            self.eat(ID)
-            self.eat(SEMI)
-            block_node = self.block()
-            proc_decl = ProcedureDecl(proc_name, block_node)
-            declarations.append(proc_decl)
-            self.eat(SEMI)
-
-        return declarations
 
     def parse(self):
         node = self.program()
