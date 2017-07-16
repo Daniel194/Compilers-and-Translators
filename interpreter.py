@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
+from lexer.constants import *
 from node_visitor import NodeVisitor
-from constants import *
 
 
 class Interpreter(NodeVisitor):

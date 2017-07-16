@@ -1,17 +1,17 @@
-from constants import *
-from parser.bin_op import BinOp
-from parser.num import Num
-from parser.unary_op import UnaryOp
+from lexer.constants import *
 from parser.assign import Assign
-from parser.compound import Compound
-from parser.var import Var
-from parser.no_op import NoOp
+from parser.bin_op import BinOp
 from parser.block import Block
-from parser.var_decl import VarDecl
-from parser.type import Type
-from parser.program import Program
+from parser.compound import Compound
+from parser.no_op import NoOp
+from parser.num import Num
 from parser.param import Param
 from parser.procedure_decl import ProcedureDecl
+from parser.program import Program
+from parser.type import Type
+from parser.unary_op import UnaryOp
+from parser.var import Var
+from parser.var_decl import VarDecl
 
 
 class Parser(object):

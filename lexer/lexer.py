@@ -1,5 +1,5 @@
-from token import Token
-from constants import *
+from lexer.constants import *
+from lexer.token import Token
 
 RESERVED_KEYWORDS = {
     'PROGRAM': Token('PROGRAM', 'PROGRAM'),
