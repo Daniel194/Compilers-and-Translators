@@ -1,17 +1,17 @@
 from constants import *
-from ast.bin_op import BinOp
-from ast.num import Num
-from ast.unary_op import UnaryOp
-from ast.assign import Assign
-from ast.compound import Compound
-from ast.var import Var
-from ast.no_op import NoOp
-from ast.block import Block
-from ast.var_decl import VarDecl
-from ast.type import Type
-from ast.program import Program
-from ast.param import Param
-from ast.procedure_decl import ProcedureDecl
+from parser.bin_op import BinOp
+from parser.num import Num
+from parser.unary_op import UnaryOp
+from parser.assign import Assign
+from parser.compound import Compound
+from parser.var import Var
+from parser.no_op import NoOp
+from parser.block import Block
+from parser.var_decl import VarDecl
+from parser.type import Type
+from parser.program import Program
+from parser.param import Param
+from parser.procedure_decl import ProcedureDecl
 
 
 class Parser(object):

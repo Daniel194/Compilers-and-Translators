@@ -1,7 +1,7 @@
-from ast.ast import AST
+from parser.ast import AST
 
 
-class BinOp(AST):
+class Assign(AST):
     def __init__(self, left, op, right):
         self.left = left
         self.token = self.op = op

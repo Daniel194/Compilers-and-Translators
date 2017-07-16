@@ -1,5 +1,5 @@
 from lexer import Lexer
-from parser import Parser
+from parser.parser import Parser
 from symbole.semantic_analyzer import SemanticAnalyzer
 
 INPUT_FILE = "input/test.txt"

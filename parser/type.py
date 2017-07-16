@@ -1,7 +1,7 @@
-from ast.ast import AST
+from parser.ast import AST
 
 
-class Var(AST):
+class Type(AST):
     def __init__(self, token):
         self.token = token
         self.value = token.value

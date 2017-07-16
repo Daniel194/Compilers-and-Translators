@@ -1,4 +1,4 @@
-from ast.ast import AST
+from parser.ast import AST
 
 
 class Program(AST):
