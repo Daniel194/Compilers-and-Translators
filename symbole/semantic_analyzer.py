@@ -1,7 +1,7 @@
-from node_visitor import NodeVisitor
-from symbole.var_symbole import VarSymbol
-from symbole.scope_symbol_table import ScopedSymbolTable
+from interpreter.node_visitor import NodeVisitor
 from symbole.procedure_symbole import ProcedureSymbol
+from symbole.scope_symbol_table import ScopedSymbolTable
+from symbole.var_symbole import VarSymbol
 
 
 class SemanticAnalyzer(NodeVisitor):

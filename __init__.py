@@ -1,4 +1,4 @@
-from lexer import Lexer
+from lexer.lexer import Lexer
 from parser.parser import Parser
 from symbole.semantic_analyzer import SemanticAnalyzer
 
